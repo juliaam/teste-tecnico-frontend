@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './styles/globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import { inter } from './styles/fonts';
 
 export const metadata: Metadata = {
   title: 'Teste técnico - Júlia',

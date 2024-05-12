@@ -6,7 +6,7 @@ import { LINKS_HEADER } from '@/app/data/header';
 export default function Header() {
   return (
     <header>
-      <div className="mx-auto flex justify-between items-center px-4">
+      <div className="mx-auto flex justify-between items-center px-8">
         <div className="flex items-center gap-2">
           <Image src={restaurant} alt="restaurante" width={25} height={25} />
           <h1 className="text-2xl font-bold">Restaurante</h1>

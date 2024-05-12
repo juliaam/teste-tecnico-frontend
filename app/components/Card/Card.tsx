@@ -7,11 +7,11 @@ type CardProps = {
 
 export default function Card({ product }: CardProps) {
   return (
-    <div className="container bg-red-500 p-7 text-center">
-      <div> Imagem </div>
+    <div className="p-5 text-center gap-3 flex flex-col items-center">
+      <Image alt={product.name} src={product.image} width={200} height={200} style={{ border: '1px solid black', borderRadius: '30px', display: 'inline-block' }}/>
       <p> {product.name}</p>
       <p> {product.product_category}</p>
-      <p>{product.price.toString()}</p>
+      <p>{product.price}</p>
     </div>
   );
 }

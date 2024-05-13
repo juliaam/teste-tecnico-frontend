@@ -25,7 +25,7 @@ export default function Menu() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getDayTime();
+      const { data } = await getDayTime();
       const menu = data.menu;
       const { products, ...rest } = menu;
 
@@ -46,7 +46,7 @@ export default function Menu() {
 
       <div className="gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {cards.map((product) => {
-          return <Card product={product} />;
+          return <Card key={product.id} product={product} />;
         })}
       </div>
     </div>

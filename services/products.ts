@@ -4,8 +4,14 @@ import axios from 'axios';
 const path = 'product';
 
 export class ProductsService {
-  static async findAllProducts() {
-    const res = await axios(`${api_base_url}${path}/`);
+  static async findAll() {
+    const res = await axios.get(`${api_base_url}${path}/`);
+    const data = await res;
+    return data;
+  }
+
+  static async create() {
+    const res = await axios.post(`${api_base_url}${path}/`);
     const data = await res;
     return data;
   }

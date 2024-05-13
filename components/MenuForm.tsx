@@ -18,7 +18,7 @@ export default function MenuForm() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllProducts();
+      const { data } = await getAllProducts();
       const products = data.products;
 
       setProducts(products);
@@ -49,9 +49,11 @@ export default function MenuForm() {
       ...prevState,
       [fieldName]: fieldValue,
     }));
+
+    createMenu(formData);
   };
 
-  const submitForm = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
 
     const menu = await createMenu(formData);
@@ -65,7 +67,7 @@ export default function MenuForm() {
 
       <form
         className="justify-center mt-10 flex flex-col gap-2"
-        onSubmit={submitForm}
+        onSubmit={submit}
       >
         <Input label="Nome" name="name" onChange={handleInput} />
         <label>

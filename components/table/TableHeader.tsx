@@ -2,7 +2,7 @@
 
 import { Plus, Search } from 'lucide-react';
 import Link from 'next/link';
-import Select from '../form/Select';
+import SelectForm from '../form/Select';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { ICategory } from '@/types/Category';
 import { getAllCategories } from '@/stores/categories';
@@ -17,7 +17,7 @@ export default function TableHeader() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllCategories();
+      const { data } = await getAllCategories();
       const categories = data.categories;
 
       setCategories(categories);
@@ -47,7 +47,7 @@ export default function TableHeader() {
           </Link>
         </div>
         <div>
-          <Select
+          <SelectForm
             onChange={searchTable}
             options={categories?.map((category) => ({
               value: category.id,

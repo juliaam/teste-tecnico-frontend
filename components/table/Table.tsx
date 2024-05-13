@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts } from '@/stores/products';
 import Image from 'next/image';
-import { ICategory } from '@/types/Category';
 
 export default function Table() {
   const [products, setProducts] = useState([
@@ -23,7 +22,7 @@ export default function Table() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllProducts();
+      const { data } = await getAllProducts();
       const products = data.products;
 
       setProducts(products);

@@ -1,27 +1,72 @@
 'use client';
 import { ubuntu } from '@/styles/fonts';
 import Input from '@/components/form/Input';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { getAllCategories } from '@/stores/categories';
-import Select from './form/Select';
 import { ICategory } from '../types/Category';
 import Image from 'next/image';
+import Select from 'react-select';
+import { IProduct } from '@/types/Product';
+import { formatPrice } from '@/utils/formatPrice';
+import { createProduct } from '@/stores/products';
+import SelectForm from './form/Select';
 
 export function ProductForm() {
   const [categories, setCategorys] = useState<ICategory[]>([]);
-
+  const [price, setPrice] = useState<any>();
+  const [formData, setFormData] = useState<IProduct[]>([
+    {
+      name: '',
+      description: '',
+      price: 0,
+      image: '',
+      idCategory: 0,
+    },
+  ]);
   const [file, setFile] = useState();
 
-  function handleChange(e: any) {
-    if (e.target.files && e.target.files[0]) {
-      setFile(URL.createObjectURL(e.target.files[0]));
+  const handleInput = (e: ChangeEvent<HTMLInputElement> | any) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
+    if (fieldName === 'price') {
+      setPrice(formatPrice(price));
     }
-  }
+
+    if (fieldName === 'file') {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const buffer = event.target.result as ArrayBuffer;
+          // Make the transformation on the buffer here
+          const transformedBuffer = transformImage(buffer);
+          const transformedBlob = new Blob([transformedBuffer], {
+            type: 'image/jpeg',
+          });
+          const transformedUrl = URL.createObjectURL(transformedBlob);
+          setFile(transformedUrl);
+        };
+        reader.readAsArrayBuffer(e.target.files[0]);
+      }
+    }
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: fieldValue,
+    }));
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    const product = await createProduct(formData);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllCategories();
+      const { data } = await getAllCategories();
       const categories = data.categories;
+      console.log(categories);
 
       setCategorys(categories);
     };
@@ -35,23 +80,34 @@ export function ProductForm() {
         Formulário de produto
       </p>
       <div className="flex justify-evenly">
-        <form className="max-w-sm mt-10 flex flex-col gap-2">
-          <Input label="Nome" />
-          <Input label="Descrição" />
-          <Input label="Preço" />
-
-          <Select
-            label="Categorias"
-            options={categories.map((category) => ({
-              value: category.id,
-              label: category.name,
-            }))}
-          />
+        <form className="max-w-sm mt-10 flex flex-col gap-2" action={submit}>
+          <Input label="Nome" name="name" onChange={handleInput} />
+          <Input label="Descrição" name="descrition" onChange={handleInput} />
           <Input
+            label="Preço"
+            name="price"
+            type="number"
+            onChange={handleInput}
+          />
+
+          <label>
+            Categorias
+            <SelectForm
+              className="text-black"
+              options={categories.map((category) => ({
+                value: category.id,
+                label: category.name,
+              }))}
+              name="idCategory"
+              onChange={handleInput}
+            />
+          </label>
+          <Input
+            name="image"
             label="Imagem"
             type="file"
             accept="image/*"
-            onChange={handleChange}
+            onChange={handleInput}
           />
 
           <button

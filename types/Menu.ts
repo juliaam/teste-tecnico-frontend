@@ -1,9 +1,9 @@
 import { IProduct } from './Product';
 
 export interface IMenu {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: string;
+  createdAt?: string;
   daytime: string;
   products?: Array<IProduct>;
 }

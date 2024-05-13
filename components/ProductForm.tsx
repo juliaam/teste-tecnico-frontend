@@ -4,11 +4,11 @@ import Input from '@/components/form/Input';
 import { useEffect, useState } from 'react';
 import { getAllCategories } from '@/stores/categories';
 import Select from './form/Select';
-import { Category } from '../types/Category';
+import { ICategory } from '../types/Category';
 import Image from 'next/image';
 
 export function ProductForm() {
-  const [categories, setCategorys] = useState<Category[]>([]);
+  const [categories, setCategorys] = useState<ICategory[]>([]);
 
   const [file, setFile] = useState();
 

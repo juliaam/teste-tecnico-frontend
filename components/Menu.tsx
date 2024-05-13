@@ -19,7 +19,7 @@ export default function Menu() {
       image: '',
       description: '',
       price: '',
-      idCategory: [],
+      idCategory: 0,
     },
   ]);
 

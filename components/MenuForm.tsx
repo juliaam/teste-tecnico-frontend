@@ -49,8 +49,6 @@ export default function MenuForm() {
       ...prevState,
       [fieldName]: fieldValue,
     }));
-
-    createMenu(formData);
   };
 
   const submit = async (e) => {

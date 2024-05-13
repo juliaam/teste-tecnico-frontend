@@ -10,8 +10,8 @@ export class ProductsService {
     return data;
   }
 
-  static async create() {
-    const res = await axios.post(`${api_base_url}${path}/`);
+  static async create(body) {
+    const res = await axios.post(`${api_base_url}${path}/`, body);
     const data = await res;
     return data;
   }

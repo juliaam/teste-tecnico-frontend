@@ -19,7 +19,7 @@ export function ProductForm() {
     image: '',
     idCategory: 0,
   });
-  const [file, setFile] = useState<string | null>(null);
+  const [file] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,8 +40,7 @@ export function ProductForm() {
     }));
   };
 
-  const setCategoryForm = (category) => {
-    debugger;
+  const setCategoryForm = (category: any) => {
     setFormData((prevState) => ({
       ...prevState,
       idCategory: category.value,

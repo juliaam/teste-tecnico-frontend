@@ -1,29 +1,18 @@
 'use client';
 
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { createCategory, getAllCategories } from '@/stores/categories';
-import { ICategory } from '../types/Category';
+import React, { ChangeEvent, useState } from 'react';
+import { createCategory } from '@/stores/categories';
+
 import Input from '@/components/form/Input';
-import { CategoryService } from '@/services/categorys';
 
 export function CategoryForm() {
-  const [category, setCategories] = useState<ICategory[]>([]);
-  const [formData, setFormData] = useState<CategoryService>({ name: '' });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getAllCategories();
-      setCategories(data.categories);
-    };
-
-    fetchData();
-  }, []);
+  const [formData, setFormData] = useState({ name: '' });
 
   const handleInput = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
+    setFormData(() => ({
       [name]: value,
     }));
   };

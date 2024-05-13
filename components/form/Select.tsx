@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 interface SelectProps extends ComponentProps<'select'> {
   label?: string;
-  options: { value: any; label: string }[] | undefined;
+  options: { value: any; label: string }[];
 }
 
 export default function SelectForm({ label, options, ...props }: SelectProps) {

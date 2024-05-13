@@ -4,11 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import restaurant from '@/assets/restaurant.svg';
 import { LINKS_HEADER } from '@/data/header';
-import { usePathname } from 'next/navigation';
 
 export default function Header() {
-  const pathname = usePathname();
-
   return (
     <header className="flex justify-between items-center px-8">
       <Link href="/">

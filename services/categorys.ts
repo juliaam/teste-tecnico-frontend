@@ -1,4 +1,5 @@
 import { api_base_url } from '@/data/api';
+import { ICategory } from '@/types/Category';
 import axios from 'axios';
 
 export class CategoryService {
@@ -7,7 +8,7 @@ export class CategoryService {
     const data = await res;
     return data;
   }
-  static async create(body) {
+  static async create(body: ICategory) {
     const res = await axios.post(`${api_base_url}category/`, body);
     const data = await res;
     return data;

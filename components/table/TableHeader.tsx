@@ -6,19 +6,9 @@ import { useEffect, useState } from 'react';
 import { ICategory } from '@/types/Category';
 import { getAllCategories } from '@/stores/categories';
 import Select from 'react-select';
-import { SingleValue } from 'react-select';
 
 export default function TableHeader() {
   const [categories, setCategories] = useState<ICategory[]>();
-  const [categorySearch, setCategoriesSearch] = useState<any>();
-
-  const [tableData, setTableData] = useState([]);
-
-  const searchTable = (
-    newValue: SingleValue<{ value: number; label: string }>
-  ) => {
-    setCategoriesSearch(newValue?.value);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,10 +20,6 @@ export default function TableHeader() {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    console.log(categorySearch);
-  }, [categorySearch]);
 
   return (
     <div className="flex justify-between items-center mb-4">
@@ -67,7 +53,6 @@ export default function TableHeader() {
           <Select
             className="text-black"
             placeholder="Selecione..."
-            onChange={searchTable}
             options={categories?.map((category) => ({
               value: category.id,
               label: category.name,

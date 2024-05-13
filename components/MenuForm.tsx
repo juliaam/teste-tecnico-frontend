@@ -27,14 +27,15 @@ export default function MenuForm() {
     fetchData();
   }, []);
 
-  const setProductsForm = (products) => {
+  const setProductsForm = (products: any) => {
+    console.log('products', products);
     setFormData((prevState) => ({
       ...prevState,
-      products: products.map((product) => product.value),
+      products: products.map((product: any) => product.value),
     }));
   };
 
-  const setDaytimeForm = (daytime: { value: string; label: string }) => {
+  const setDaytimeForm = (daytime: any) => {
     setFormData((prevState) => ({
       ...prevState,
       daytime: daytime.value,
@@ -51,10 +52,10 @@ export default function MenuForm() {
     }));
   };
 
-  const submit = async (e) => {
+  const submit = async (e: any) => {
     e.preventDefault();
 
-    const menu = await createMenu(formData);
+    await createMenu(formData);
   };
 
   return (

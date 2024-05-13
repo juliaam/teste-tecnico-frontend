@@ -2,13 +2,13 @@
 
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { createCategory, getAllCategories } from '@/stores/categories';
-import { createProduct } from '@/stores/products';
 import { ICategory } from '../types/Category';
 import Input from '@/components/form/Input';
+import { CategoryService } from '@/services/categorys';
 
 export function CategoryForm() {
   const [category, setCategories] = useState<ICategory[]>([]);
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState<CategoryService>({ name: '' });
 
   useEffect(() => {
     const fetchData = async () => {

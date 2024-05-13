@@ -7,4 +7,9 @@ export class CategoryService {
     const data = await res;
     return data;
   }
+  static async create(body) {
+    const res = await axios.post(`${api_base_url}category/`, body);
+    const data = await res;
+    return data;
+  }
 }

@@ -1,4 +1,3 @@
-import { Plus, Search } from 'lucide-react';
 import Table from '@/components/table/Table';
 import TableHeader from '@/components/table/TableHeader';
 

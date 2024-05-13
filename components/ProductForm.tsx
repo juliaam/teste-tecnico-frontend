@@ -5,9 +5,9 @@ import { getAllCategories } from '@/stores/categories';
 import { createProduct } from '@/stores/products';
 import { ICategory } from '../types/Category';
 import { IProduct } from '@/types/Product';
-import { formatPrice } from '@/utils/formatPrice';
 import Input from '@/components/form/Input';
-import SelectForm from './form/Select';
+import Select from 'react-select';
+
 import Image from 'next/image';
 
 export function ProductForm() {
@@ -23,12 +23,8 @@ export function ProductForm() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const { data } = await getAllCategories();
-        setCategories(data.categories);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
+      const { data } = await getAllCategories();
+      setCategories(data.categories);
     };
 
     fetchData();
@@ -44,16 +40,12 @@ export function ProductForm() {
     }));
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const url = event.target.result as string;
-        setFile(url);
-      };
-      reader.readAsDataURL(file);
-    }
+  const setCategoryForm = (category) => {
+    debugger;
+    setFormData((prevState) => ({
+      ...prevState,
+      idCategory: category.value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,24 +77,26 @@ export function ProductForm() {
             type="number"
             onChange={handleInput}
           />
-          <label>
-            Categorias
-            <SelectForm
-              className="text-black"
-              options={categories.map((category) => ({
-                value: category.id,
-                label: category.name,
-              }))}
-              name="idCategory"
-              onChange={handleInput}
-            />
-          </label>
+          <div>
+            <label>
+              Categorias
+              <Select
+                placeholder="Selecione"
+                className="text-black"
+                options={categories.map((category) => ({
+                  value: category.id,
+                  label: category.name,
+                }))}
+                onChange={setCategoryForm}
+              />
+            </label>
+          </div>
           <Input
-            name="image"
             label="Imagem"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
+            placeholder="Insira o link da imagem"
+            type="text"
+            name="image"
+            onChange={handleInput}
           />
           <button
             type="submit"

@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus, Search } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import SelectForm from '../form/Select';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -42,6 +42,14 @@ export default function TableHeader() {
           <Link href="products/form">
             <button className=" border border-white/10 rounded-lg p-2 flex items-center gap-2">
               <p> Adicionar produtos</p>
+              <Plus size={18} />
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Link href="/category/form">
+            <button className="border border-white/10 rounded-lg p-2 flex items-center gap-2">
+              <p> Adicionar categoria</p>
               <Plus size={18} />
             </button>
           </Link>

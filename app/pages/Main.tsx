@@ -1,4 +1,4 @@
-import Menu from '../Menu/Menu';
+import Menu from '@/components/Menu';
 
 export default function Main() {
   return (

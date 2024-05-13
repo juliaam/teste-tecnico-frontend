@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import './styles/globals.css';
-import { inter } from './styles/fonts';
+import '../styles/globals.css';
+import { inter } from '../styles/fonts';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Teste técnico - Júlia',
@@ -14,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="h-dvh py-5 flex flex-col gap-5">
+          <Header />
+          <main className="mx-14">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

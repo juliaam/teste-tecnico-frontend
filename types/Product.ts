@@ -1,8 +1,8 @@
-export interface Product {
+export interface IProduct {
   id: number;
   name: string;
   image: string;
   description: string;
   price: string;
-  product_category: any;
+  idCategory: number;
 }

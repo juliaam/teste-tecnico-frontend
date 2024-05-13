@@ -8,8 +8,6 @@ import { IProduct } from '@/types/Product';
 import Input from '@/components/form/Input';
 import Select from 'react-select';
 
-import Image from 'next/image';
-
 export function ProductForm() {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [formData, setFormData] = useState<IProduct>({
@@ -19,7 +17,6 @@ export function ProductForm() {
     image: '',
     idCategory: 0,
   });
-  const [file] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,20 +101,6 @@ export function ProductForm() {
             Confirmar
           </button>
         </form>
-        <div className="mt-10">
-          <p>Preview de imagem:</p>
-          {file ? (
-            <Image
-              className="border border-white/10 rounded-md"
-              src={file}
-              alt="Imagem"
-              width={400}
-              height={400}
-            />
-          ) : (
-            <div>Escolha uma imagem para preview</div>
-          )}
-        </div>
       </div>
     </div>
   );
